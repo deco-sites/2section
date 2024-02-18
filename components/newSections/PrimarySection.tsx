@@ -1,5 +1,5 @@
-import ButtonTab from "../../islands/buttonControl/ButtonTab.tsx";
-import Article from "../../islands/buttonControl/Article.tsx";
+import ButtonTab from "../../islands/buttonsControl/ButtonTab.tsx";
+import Article from "../../islands/buttonsControl/Article.tsx";
 import ButtonLink from "./ButtonLink.tsx";
 
 interface Content {
