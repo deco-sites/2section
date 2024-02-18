@@ -10,24 +10,22 @@ export interface Props extends ItemsTopic {
 
 export default function ButtonTab({ props }: { props: Props }) {
   const { showArticle } = useUI();
-  const showArticleMobile = useSignal(false)
+  const showArticleMobile = useSignal(false);
 
   function teste() {
     showArticle.value = props.index;
   }
 
   function showMobile() {
-
-    showArticleMobile.value = !showArticleMobile.value
-
+    showArticleMobile.value = !showArticleMobile.value;
   }
 
   return (
     <div class="flex justify-start flex-col">
-
       <button
-        class={`${showArticle.value === props.index ? "text-white" : "text-[#52525B]"
-          } text-start hidden lg:flex `}
+        class={`${
+          showArticle.value === props.index ? "text-white" : "text-[#52525B]"
+        } text-start hidden lg:flex `}
         onClick={teste}
       >
         {props.title}
@@ -40,13 +38,21 @@ export default function ButtonTab({ props }: { props: Props }) {
         {props.title}
         {props.flagTime && <FlagTime label={props.flagTime} />}
       </button>
-      <div class={`flex flex-col text-[#A1A1AA] gap-6 ${showArticleMobile.value ? "h-auto mb-4 mt-3 opacity-100" : "h-0 opacity-0 -z-10 fade"} anima ease-in-out duration-300 `}>
+      <div
+        class={`flex flex-col text-[#A1A1AA] gap-6 ${
+          showArticleMobile.value
+            ? "h-auto mb-4 mt-3 opacity-100"
+            : "h-0 opacity-0 -z-10 fade"
+        } anima ease-in-out duration-300 `}
+      >
         <span dangerouslySetInnerHTML={{ __html: props.subTitle }}>
         </span>
         <ul class="gap-4 flex flex-col">
           {props.content.content.map((content) => (
             <li class="text-lg  text-start flex flex-row items-start gap-2">
-              <Icon id="Plus-Deco" size={18} class={"min-w-[18px] mt-[6px]"} /> {content}
+              <Icon id="Plus-Deco" size={18} class={"min-w-[18px] mt-[6px]"} />
+              {" "}
+              {content}
             </li>
           ))}
         </ul>
