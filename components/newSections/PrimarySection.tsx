@@ -26,7 +26,7 @@ export interface ItemsTopic {
   flagTime?: string;
 }
 
-interface Topics {
+export interface Topics {
   title: string;
   /**
    * @description recomened max 3
@@ -266,24 +266,24 @@ export default function PrimarySection({ props }: { props: Props }) {
       >
       </span>
       <div class="flex w-full flex-row mt-9 xl:gap-16">
-        <div class="w-3/12 flex flex-col gap-3">
+        <div class="w-full lg:w-3/12 flex flex-col lg:gap-3 gap-16">
           {topics.map((topic, indexTopic) => {
             return (
-              <>
+              <div class="rounded-full gap-8 flex flex-col">
                 <h3 class="text-accent text-2xl font-semibold">
                   {topic.title}
                 </h3>
                 {topic.itemsTopics.map((itemTopic, index) => (
                   <ButtonTab
-                    label={itemTopic.title}
+                    {...itemTopic}
                     index={index.toString() + indexTopic.toString()}
                   />
                 ))}
-              </>
+              </div>
             );
           })}
         </div>
-        <div class="w-3/4 flex flex-col py-8 lg:mx-6 xl:mx-14">
+        <div class="w-3/4 hidden lg:flex flex-col py-8 lg:mx-6 xl:mx-14 ">
           {topics.map((topic, indexTopic) => (
             topic.itemsTopics.map((itemTopic, index) => (
               <Article
