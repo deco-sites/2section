@@ -12,7 +12,7 @@ export default function ButtonTab({ props }: { props: Props }) {
   const { showArticle } = useUI();
   const showArticleMobile = useSignal(false);
 
-  function teste() {
+  function show() {
     showArticle.value = props.index;
   }
 
@@ -26,7 +26,7 @@ export default function ButtonTab({ props }: { props: Props }) {
         class={`${
           showArticle.value === props.index ? "text-white" : "text-[#52525B]"
         } text-start hidden lg:flex flex-row items-center duration-200`}
-        onClick={teste}
+        onClick={show}
       >
         <Icon
           id="ArrowRigth"
