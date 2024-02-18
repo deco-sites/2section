@@ -1,5 +1,6 @@
 import ButtonTab from "../../islands/buttonControl/ButtonTab.tsx";
 import Article from "../../islands/buttonControl/Article.tsx";
+import ButtonLink from "./ButtonLink.tsx";
 
 interface Content {
   title: string;
@@ -19,10 +20,7 @@ export interface ItemsTopic {
    * @format html
    */
   content: Content;
-  button?: {
-    label?: string;
-    href?: string;
-  };
+
   flagTime?: string;
 }
 
@@ -44,6 +42,10 @@ export interface Props {
    * @description recomened max 3
    */
   topics: Topics[];
+  button?: {
+    label?: string;
+    href?: string;
+  };
 }
 
 const BASE_PROPS = {
@@ -258,19 +260,22 @@ export default function PrimarySection({ props }: { props: Props }) {
   const { title, subTitle, topics } = { ...BASE_PROPS, ...props };
 
   return (
-    <div class="container bg-black flex justify-center flex-col w-full py-6 rounded-3xl px-4">
-      <h2 class="text-7xl text-white font-medium text-center mb-9">{title}</h2>
+    <div class="container max-w-[1280px] mx-auto flex justify-center flex-col w-full py-6 rounded-3xl px-4">
+      <h2 class="text-5xl lg:text-7xl text-white font-medium text-center mb-9">
+        {title}
+      </h2>
       <span
         class="text-center text-lg text-[#A1A1AA]"
         dangerouslySetInnerHTML={{ __html: subTitle }}
       >
       </span>
-      <div class="flex w-full flex-row mt-9 xl:gap-16">
-        <div class="w-full lg:w-3/12 flex flex-col lg:gap-3 gap-16">
+      <div class="flex w-full flex-row mt-9 xl:gap-16 lg:bg-[#000D0D] rounded-3xl lg:px-3">
+        <div class="w-full lg:w-[28%] flex flex-col lg:gap-5 xl:gap-14 gap-16">
           {topics.map((topic, indexTopic) => {
             return (
-              <div class="rounded-full gap-8 flex flex-col">
+              <div class="rounded-3xl lg:gap-4 gap-8 flex flex-col bg-[#000D0D] px-4 py-8 lg:py-2 lg:px-0">
                 <h3 class="text-accent text-2xl font-semibold">
+                  <span class="lg:hidden">{indexTopic + 1 + ". "}</span>
                   {topic.title}
                 </h3>
                 {topic.itemsTopics.map((itemTopic, index) => (
@@ -279,11 +284,18 @@ export default function PrimarySection({ props }: { props: Props }) {
                     index={index.toString() + indexTopic.toString()}
                   />
                 ))}
+                {topics.length === (indexTopic + 1) && props.button?.label && (
+                  <ButtonLink
+                    classCustom="lg:hidden flex"
+                    label={props.button?.label}
+                    href={props.button?.href}
+                  />
+                )}
               </div>
             );
           })}
         </div>
-        <div class="w-3/4 hidden lg:flex flex-col py-8 lg:mx-6 xl:mx-14 ">
+        <div class="w-3/4 hidden lg:flex flex-col py-8 lg:py-16 lg:mx-6 ">
           {topics.map((topic, indexTopic) => (
             topic.itemsTopics.map((itemTopic, index) => (
               <Article
@@ -291,11 +303,17 @@ export default function PrimarySection({ props }: { props: Props }) {
                 subTitle={itemTopic.subTitle}
                 content={itemTopic.content}
                 flagTime={itemTopic.flagTime}
-                button={itemTopic.button}
                 index={index.toString() + indexTopic.toString()}
               />
             ))
           ))}
+          {props.button?.label && (
+            <ButtonLink
+              classCustom="hidden lg:flex"
+              label={props.button?.label}
+              href={props.button?.href}
+            />
+          )}
         </div>
       </div>
     </div>

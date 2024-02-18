@@ -18,9 +18,6 @@ export default function Article({ props }: { props: Props }) {
           ? "visible opacity-100 h-full"
           : "invisible opacity-0 "
       }`}
-      onClick={() => {
-        console.log("click");
-      }}
     >
       {showArticle.value === props.index &&
         (
@@ -37,19 +34,13 @@ export default function Article({ props }: { props: Props }) {
               {props.content.title}
             </h5>
             {props.flagTime && <FlagTime label={props.flagTime} />}
-            <ul>
+            <ul class="flex flex-col gap-4">
               {props.content.content.map((content) => (
                 <li class="text-lg text-[#A1A1AA] text-start flex flex-row items-center gap-2">
-                  <Icon id="Plus-Deco" size={24} /> {content}
+                  <Icon id="PlusDeco" size={24} /> {content}
                 </li>
               ))}
             </ul>
-            {props.button?.label && (
-              <ButtonLink
-                label={props.button.label}
-                href={props.button.href || ""}
-              />
-            )}
           </>
         )}
     </div>

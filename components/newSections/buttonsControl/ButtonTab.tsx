@@ -25,9 +25,18 @@ export default function ButtonTab({ props }: { props: Props }) {
       <button
         class={`${
           showArticle.value === props.index ? "text-white" : "text-[#52525B]"
-        } text-start hidden lg:flex `}
+        } text-start hidden lg:flex flex-row items-center duration-200`}
         onClick={teste}
       >
+        <Icon
+          id="ArrowRigth"
+          size={24}
+          class={`${
+            showArticle.value === props.index
+              ? "w-auto translate-x-0 mr-1"
+              : "w-0 -translate-x-100"
+          } duration-200`}
+        />
         {props.title}
       </button>
 
@@ -35,27 +44,38 @@ export default function ButtonTab({ props }: { props: Props }) {
         class={`text-white text-lg text-center bg-[#0535354D] rounded-full w-full flex flex-col gap-2 lg:hidden items-center min-h-[100px] justify-center `}
         onClick={showMobile}
       >
-        {props.title}
+        <span class="flex flex-row gap-3 items-center">
+          <Icon id="ArrowDown" size={24} class="min-w-[18px]" />
+          {props.title}
+        </span>
         {props.flagTime && <FlagTime label={props.flagTime} />}
       </button>
       <div
         class={`flex flex-col text-[#A1A1AA] gap-6 ${
           showArticleMobile.value
             ? "h-auto mb-4 mt-3 opacity-100"
-            : "h-0 opacity-0 -z-10 fade"
-        } anima ease-in-out duration-300 `}
+            : "h-0 opacity-0 -z-10"
+        } ease-out duration-300 `}
       >
-        <span dangerouslySetInnerHTML={{ __html: props.subTitle }}>
-        </span>
-        <ul class="gap-4 flex flex-col">
-          {props.content.content.map((content) => (
-            <li class="text-lg  text-start flex flex-row items-start gap-2">
-              <Icon id="Plus-Deco" size={18} class={"min-w-[18px] mt-[6px]"} />
-              {" "}
-              {content}
-            </li>
-          ))}
-        </ul>
+        {showArticleMobile.value &&
+          (
+            <>
+              <span dangerouslySetInnerHTML={{ __html: props.subTitle }}>
+              </span>
+              <ul class="gap-4 flex flex-col">
+                {props.content.content.map((content) => (
+                  <li class="text-lg  text-start flex flex-row items-start gap-2">
+                    <Icon
+                      id="PlusDeco"
+                      size={18}
+                      class={"min-w-[18px] mt-[6px]"}
+                    />{" "}
+                    {content}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
       </div>
     </div>
   );
