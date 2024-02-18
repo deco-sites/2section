@@ -1,1 +1,1 @@
-export { default } from "$store/components/newSections/PrimarySection.tsx"
+export { default } from "$store/components/newSections/PrimarySection.tsx";
